@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prof. Esequiel Mesquita | UFC – IAUD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --navy: #0f2340;
+      --navy-mid: #1a3a5c;
+      --accent: #c8973a;
+      --accent-light: #e8b85a;
+      --light: #f5f7fa;
+      --white: #ffffff;
+      --text: #2d3748;
+      --text-muted: #718096;
+      --border: #e2e8f0;
+      --card-shadow: 0 4px 24px rgba(15,35,64,0.10);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--light); line-height: 1.7; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(15,35,64,0.97); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(200,151,58,0.2);
+    }
+    .nav-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 13px 24px;
+    }
+    .nav-logo { color: var(--accent); font-weight: 700; font-size: .95rem; letter-spacing: .04em; text-decoration: none; }
+    .nav-links { display: flex; gap: 22px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.82); text-decoration: none; font-size: .85rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--accent-light); }
+
+    /* Language switcher */
+    .lang-switcher { display: flex; gap: 4px; }
+    .lang-btn {
+      background: transparent; border: 1.5px solid rgba(255,255,255,.25);
+      color: rgba(255,255,255,.6); font-size: .75rem; font-weight: 700;
+      padding: 4px 9px; border-radius: 6px; cursor: pointer;
+      transition: all .2s; letter-spacing: .04em; font-family: 'Inter', sans-serif;
+    }
+    .lang-btn:hover { border-color: var(--accent); color: var(--accent-light); }
+    .lang-btn.active { background: var(--accent); border-color: var(--accent); color: var(--navy); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1f5080 100%);
+      display: flex; align-items: center; padding: 100px 24px 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; width: 600px; height: 600px;
+      border-radius: 50%; background: rgba(200,151,58,.06); right: -150px; top: -150px;
+    }
+    .hero::after {
+      content: ''; position: absolute; width: 300px; height: 300px;
+      border-radius: 50%; background: rgba(200,151,58,.05); left: -80px; bottom: 40px;
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; gap: 64px; z-index: 1; position: relative;
+    }
+    .hero-photo {
+      flex-shrink: 0; width: 240px; height: 240px; border-radius: 50%;
+      border: 4px solid var(--accent);
+      box-shadow: 0 0 0 8px rgba(200,151,58,.15), 0 20px 60px rgba(0,0,0,.4);
+      overflow: hidden; background: var(--navy-mid);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .hero-photo .placeholder-icon { font-size: 5rem; color: rgba(200,151,58,.4); }
+    .hero-text { flex: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(200,151,58,.15); border: 1px solid rgba(200,151,58,.35);
+      color: var(--accent-light); padding: 6px 14px; border-radius: 100px;
+      font-size: .78rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white);
+      line-height: 1.15; margin-bottom: 12px;
+    }
+    .hero-subtitle { color: rgba(255,255,255,.75); font-size: 1rem; margin-bottom: 5px; }
+    .hero-subtitle strong { color: var(--accent-light); font-weight: 600; }
+    .hero-institution { color: rgba(255,255,255,.55); font-size: .88rem; margin-top: 4px; }
+    .hero-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .hero-links a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 8px; font-size: .875rem;
+      font-weight: 600; text-decoration: none; transition: all .25s;
+    }
+    .btn-primary { background: var(--accent); color: var(--navy); }
+    .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); }
+    .btn-outline { border: 1.5px solid rgba(255,255,255,.35); color: rgba(255,255,255,.85); }
+    .btn-outline:hover { border-color: var(--accent-light); color: var(--accent-light); transform: translateY(-2px); }
+
+    /* ── STATS BAR ── */
+    .stats-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 28px 24px; }
+    .stats-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-value { font-size: 2rem; font-weight: 700; color: var(--navy); line-height: 1; }
+    .stat-value span { color: var(--accent); }
+    .stat-label { font-size: .78rem; color: var(--text-muted); margin-top: 4px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 24px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--navy); margin-bottom: 8px; }
+    .section-line { width: 52px; height: 3px; background: var(--accent); border-radius: 2px; margin-bottom: 40px; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 340px; gap: 56px; align-items: start; }
+    .about-text p { color: var(--text); font-size: 1rem; margin-bottom: 16px; line-height: 1.85; }
+    .info-card { background: var(--light); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+    .info-card h4 { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); font-weight: 700; margin-bottom: 14px; }
+    .info-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: .875rem; }
+    .info-row:last-child { border-bottom: none; }
+    .info-row i { color: var(--accent); width: 16px; margin-top: 2px; flex-shrink: 0; }
+    .info-row a { color: var(--navy); text-decoration: none; }
+    .info-row a:hover { color: var(--accent); text-decoration: underline; }
+
+    /* ── RESEARCH ── */
+    #research { background: var(--light); }
+    .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .research-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: 14px;
+      padding: 28px 24px; transition: all .25s; border-top: 3px solid transparent;
+    }
+    .research-card:hover { border-top-color: var(--accent); box-shadow: var(--card-shadow); transform: translateY(-4px); }
+    .research-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; color: var(--accent); margin-bottom: 16px;
+    }
+    .research-card h3 { font-size: .93rem; font-weight: 600; color: var(--navy); line-height: 1.4; }
+
+    /* ── PUBLICATIONS ── */
+    #publications { background: var(--white); }
+    .pub-list { list-style: none; }
+    .pub-item { padding: 20px 0; border-bottom: 1px solid var(--border); display: flex; gap: 16px; }
+    .pub-item:last-child { border-bottom: none; }
+    .pub-num {
+      flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+      background: var(--navy); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 700; margin-top: 2px;
+    }
+    .pub-title { font-size: .93rem; font-weight: 600; color: var(--navy); line-height: 1.4; margin-bottom: 4px; }
+    .pub-authors { font-size: .81rem; color: var(--text-muted); margin-bottom: 4px; }
+    .pub-venue { font-size: .81rem; color: var(--accent); font-style: italic; font-weight: 500; }
+    .pub-year {
+      font-size: .76rem; font-weight: 700; color: var(--white);
+      background: var(--navy); padding: 2px 8px; border-radius: 4px;
+      display: inline-block; margin-left: 8px;
+    }
+    .pub-sub-title {
+      font-size: 1rem; font-weight: 700; color: var(--navy);
+      margin-bottom: 20px; padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .pub-sub-title::before {
+      content: ''; display: inline-block; width: 4px; height: 20px;
+      background: var(--accent); border-radius: 2px;
+    }
+    .buy-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      margin-left: 10px; font-size: .72rem; font-weight: 700;
+      background: #ff9900; color: #111; padding: 3px 10px;
+      border-radius: 5px; text-decoration: none; vertical-align: middle;
+      transition: all .2s; letter-spacing: .02em;
+    }
+    .buy-btn:hover { background: #e68a00; transform: translateY(-1px); }
+    .book-num {
+      background: var(--accent) !important;
+      font-size: .9rem !important;
+    }
+    .books-list .pub-item { background: rgba(200,151,58,.04); border-radius: 8px; padding: 16px 12px; margin-bottom: 4px; border-bottom: none !important; }
+    .books-list { border-top: 1px solid var(--border); }
+    .view-more {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 32px;
+      color: var(--navy); font-weight: 600; text-decoration: none; font-size: .9rem;
+      border: 1.5px solid var(--navy); padding: 10px 22px; border-radius: 8px; transition: all .2s;
+    }
+    .view-more:hover { background: var(--navy); color: var(--white); }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--light); }
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
+      width: 2px; background: var(--border);
+    }
+    .timeline-item { position: relative; margin-bottom: 36px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute; left: -29px; top: 6px; width: 16px; height: 16px;
+      border-radius: 50%; background: var(--accent);
+      border: 3px solid var(--light); box-shadow: 0 0 0 2px var(--accent);
+    }
+    .timeline-period { font-size: .76rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+    .timeline-title { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+    .timeline-institution { font-size: .875rem; color: var(--text-muted); margin-bottom: 6px; }
+    .timeline-detail { font-size: .85rem; color: var(--text); line-height: 1.6; }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--white); }
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .project-card {
+      background: var(--light); border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px; transition: all .25s;
+    }
+    .project-card:hover { box-shadow: var(--card-shadow); transform: translateY(-3px); }
+    .project-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .71rem; font-weight: 700; padding: 3px 10px;
+      border-radius: 100px; margin-bottom: 12px;
+      letter-spacing: .04em; text-transform: uppercase;
+    }
+    .badge-active { background: rgba(56,161,105,.12); color: #2f855a; border: 1px solid rgba(56,161,105,.3); }
+    .badge-completed { background: rgba(113,128,150,.12); color: #4a5568; border: 1px solid rgba(113,128,150,.3); }
+    .project-card h3 { font-size: .93rem; font-weight: 700; color: var(--navy); line-height: 1.4; margin-bottom: 8px; }
+    .project-card p { font-size: .84rem; color: var(--text-muted); line-height: 1.6; }
+    .project-funder { font-size: .77rem; color: var(--accent); font-weight: 600; margin-top: 10px; }
+
+    /* ── AWARDS ── */
+    #awards { background: var(--light); }
+    .awards-list { list-style: none; }
+    .award-item { display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .award-item:last-child { border-bottom: none; }
+    .award-year {
+      flex-shrink: 0; font-size: .76rem; font-weight: 700; color: var(--white);
+      background: var(--accent); padding: 3px 10px; border-radius: 6px;
+      min-width: 52px; text-align: center;
+    }
+    .award-title { font-size: .92rem; font-weight: 600; color: var(--navy); }
+    .award-org { font-size: .81rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--navy); color: var(--white); }
+    #contact .section-title { color: var(--white); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .contact-info-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 24px; }
+    .contact-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: rgba(200,151,58,.15); border: 1px solid rgba(200,151,58,.3);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); flex-shrink: 0;
+    }
+    .contact-info-item h4 { font-size: .76rem; text-transform: uppercase; letter-spacing: .06em; color: rgba(255,255,255,.5); margin-bottom: 3px; }
+    .contact-info-item p, .contact-info-item a { color: rgba(255,255,255,.85); font-size: .9rem; text-decoration: none; }
+    .contact-info-item a:hover { color: var(--accent-light); }
+    .profiles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .profile-link {
+      display: flex; align-items: center; gap: 10px; padding: 14px 16px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px; text-decoration: none; color: rgba(255,255,255,.85);
+      font-size: .875rem; font-weight: 500; transition: all .2s;
+    }
+    .profile-link:hover { background: rgba(200,151,58,.15); border-color: rgba(200,151,58,.4); color: var(--accent-light); transform: translateY(-2px); }
+    .profile-link i { font-size: 1.1rem; color: var(--accent); }
+
+    /* ── ATENDIMENTOS ── */
+    #atendimentos { background: var(--white); }
+    .atend-grid { display: grid; grid-template-columns: 1fr 360px; gap: 56px; align-items: start; }
+    .atend-text > p { font-size: 1rem; color: var(--text); margin-bottom: 24px; line-height: 1.8; }
+    .atend-policy-card {
+      display: flex; gap: 18px; align-items: flex-start;
+      background: var(--light); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px; margin-bottom: 16px;
+      transition: all .25s;
+    }
+    .atend-policy-card:hover { box-shadow: var(--card-shadow); transform: translateY(-2px); }
+    .atend-policy-icon {
+      width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-size: 1.15rem;
+    }
+    .atend-policy-card h3 { font-size: .9rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .atend-policy-card p { font-size: .875rem; color: var(--text-muted); line-height: 1.65; }
+    .atend-policy-card strong { color: var(--navy); }
+    .atend-btn {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 8px;
+      background: var(--navy); color: var(--white); text-decoration: none;
+      padding: 13px 26px; border-radius: 10px; font-size: .9rem; font-weight: 600;
+      transition: all .25s;
+    }
+    .atend-btn:hover { background: var(--accent); color: var(--navy); transform: translateY(-2px); }
+    .atend-embed-box {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: 20px; padding: 48px 32px; text-align: center;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(200,151,58,.2);
+    }
+    .atend-cal-icon { font-size: 3.5rem; color: var(--accent); margin-bottom: 20px; display: block; }
+    .atend-embed-box p { color: var(--white); font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+    .atend-cal-sub { font-size: .85rem !important; font-weight: 400 !important; color: rgba(255,255,255,.65) !important; }
+    .atend-embed-box .atend-btn { background: var(--accent); color: var(--navy); }
+    .atend-embed-box .atend-btn:hover { background: var(--accent-light); }
+    @media (max-width: 900px) { .atend-grid { grid-template-columns: 1fr; } }
+
+    /* ── FOOTER ── */
+    footer { background: #07162a; padding: 24px; text-align: center; font-size: .81rem; color: rgba(255,255,255,.4); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { flex-direction: column; text-align: center; gap: 32px; }
+      .hero-links { justify-content: center; }
+      .about-grid { grid-template-columns: 1fr; }
+      .research-grid { grid-template-columns: 1fr 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 14px; }
+    }
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .research-grid { grid-template-columns: 1fr; }
+      .stats-inner { gap: 32px; }
+      .profiles-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Prof. Esequiel Mesquita</a>
+    <ul class="nav-links">
+      <li><a href="#about"       data-i18n="nav_about">Sobre</a></li>
+      <li><a href="#research"    data-i18n="nav_research">Pesquisa</a></li>
+      <li><a href="#publications"data-i18n="nav_publications">Publicações</a></li>
+      <li><a href="#education"   data-i18n="nav_education">Formação</a></li>
+      <li><a href="#projects"    data-i18n="nav_projects">Projetos</a></li>
+      <li><a href="#awards"       data-i18n="nav_awards">Prêmios</a></li>
+      <li><a href="#atendimentos" data-i18n="nav_atendimentos">Atendimentos</a></li>
+      <li><a href="#contact"      data-i18n="nav_contact">Contato</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('pt')" id="btn-pt">PT</button>
+      <button class="lang-btn"        onclick="setLang('en')" id="btn-en">EN</button>
+      <button class="lang-btn"        onclick="setLang('es')" id="btn-es">ES</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-photo">
+      <img src="photo.jpg" alt="Prof. Esequiel Mesquita"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+      <div class="placeholder-icon" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;">
+        <i class="fas fa-user-tie"></i>
+      </div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-badge">
+        <i class="fas fa-award"></i>
+        <span data-i18n="hero_badge">Bolsista de Produtividade em Pesquisa CNPq — Nível 2</span>
+      </div>
+      <h1>Esequiel Fernandes<br />Teixeira Mesquita</h1>
+      <p class="hero-subtitle">
+        <strong data-i18n="hero_role">Professor Adjunto</strong>
+        &nbsp;·&nbsp;
+        <span data-i18n="hero_dept">Instituto de Arquitetura, Urbanismo e Design (IAUD)</span>
+      </p>
+      <p class="hero-institution">
+        <span data-i18n="hero_uni">Universidade Federal do Ceará — UFC</span>
+      </p>
+      <p class="hero-institution" style="margin-top:6px;">
+        <span data-i18n="hero_editor">Editor-Chefe · <em>Journal of Building Pathology and Rehabilitation</em> (Springer)</span>
+      </p>
+      <div class="hero-links">
+        <a href="http://lattes.cnpq.br/3585259598740974" target="_blank" class="btn-primary">
+          <i class="fas fa-external-link-alt"></i>
+          <span data-i18n="hero_btn_lattes">Currículo Lattes</span>
+        </a>
+        <a href="https://orcid.org/0000-0001-9905-6220" target="_blank" class="btn-outline">
+          <i class="fab fa-orcid"></i> ORCID
+        </a>
+        <a href="#contact" class="btn-outline">
+          <i class="fas fa-envelope"></i>
+          <span data-i18n="hero_btn_contact">Contato</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS BAR ════════════════════════════════════ -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-value">120<span>+</span></div>
+      <div class="stat-label" data-i18n="stat_pubs">Publicações</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">50<span>+</span></div>
+      <div class="stat-label" data-i18n="stat_intl">Artigos Internacionais</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">7<span>+</span></div>
+      <div class="stat-label" data-i18n="stat_years">Anos de Docência (UFC)</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">4</div>
+      <div class="stat-label" data-i18n="stat_langs">Idiomas</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">10<span>+</span></div>
+      <div class="stat-label" data-i18n="stat_projects">Projetos de Pesquisa</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABOUT ════════════════════════════════════════ -->
+<section id="about">
+  <div class="section-inner">
+    <h2 class="section-title" data-i18n="nav_about">Sobre</h2>
+    <div class="section-line"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p data-i18n="about_p1">Esequiel Mesquita é Professor do Instituto de Arquitetura, Urbanismo e Design (IAUD) e Coordenador do Programa de Pós-Graduação em Engenharia Civil da Universidade Federal do Ceará (UFC). Possui doutorado em Engenharia Civil pela Faculdade de Engenharia da Universidade do Porto e foi Professor Visitante no Institut National des Sciences Appliquées de Rouen (França, 2023) e na Universidade de Pisa (2024).</p>
+        <p data-i18n="about_p2">É Editor-Chefe do <em>Journal of Building Pathology and Rehabilitation</em> (Springer) e Editor-Guest do <em>Digital Applications in Archaeology and Cultural Heritage</em>. Membro especialista do ICOMOS e da RILEM, está envolvido em vários projetos nacionais e internacionais, com fortes colaborações na América do Sul e Europa.</p>
+        <p data-i18n="about_p3">Coordena o projeto <strong>Tecnologia e Inovação do Patrimônio Cultural do Ceará</strong> (FUNCAP), que promove levantamentos digitais, modelos 3D para preservação e documentação, e ferramentas inovadoras de HBIM. Sua pesquisa contempla patologia de edificações, monitoramento estrutural, patrimônio cultural, digitalização, HBIM, vulnerabilidade estrutural e mitigação de riscos de mudanças climáticas no contexto do patrimônio histórico.</p>
+        <p data-i18n="about_p4">Suas contribuições acadêmicas incluem mais de 120 publicações, incluindo mais de 50 artigos em importantes revistas internacionais, além de ter orientado e co-orientado alunos de graduação, mestrado e doutorado.</p>
+      </div>
+      <div class="about-sidebar">
+        <div class="info-card">
+          <h4 data-i18n="sidebar_contact_title">Contato e Perfis</h4>
+          <div class="info-row"><i class="fas fa-university"></i><span data-i18n="sidebar_inst">UFC – IAUD</span></div>
+          <div class="info-row"><i class="fas fa-map-marker-alt"></i><span data-i18n="sidebar_loc">Fortaleza, Ceará, Brasil</span></div>
+          <div class="info-row"><i class="fas fa-envelope"></i><a href="mailto:emesquita@ufc.br">emesquita@ufc.br</a></div>
+          <div class="info-row"><i class="fas fa-link"></i><a href="http://lattes.cnpq.br/3585259598740974" target="_blank">Lattes CV</a></div>
+          <div class="info-row"><i class="fab fa-orcid"></i><a href="https://orcid.org/0000-0001-9905-6220" target="_blank">0000-0001-9905-6220</a></div>
+          <div class="info-row"><i class="fas fa-globe"></i><a href="https://iaud.ufc.br" target="_blank">IAUD – UFC</a></div>
+        </div>
+        <div class="info-card">
+          <h4 data-i18n="sidebar_langs_title">Idiomas</h4>
+          <div class="info-row"><i class="fas fa-language"></i><span data-i18n="lang_pt">Português — Nativo</span></div>
+          <div class="info-row"><i class="fas fa-language"></i><span data-i18n="lang_en">Inglês — Fluente</span></div>
+          <div class="info-row"><i class="fas fa-language"></i><span data-i18n="lang_es">Espanhol — Fluente</span></div>
+          <div class="info-row"><i class="fas fa-language"></i><span data-i18n="lang_it">Italiano — Intermediário</span></div>
+        </div>
+        <div class="info-card">
+          <h4 data-i18n="sidebar_editorial_title">Atividade Editorial</h4>
+          <div class="info-row"><i class="fas fa-edit"></i><span data-i18n="editorial_1">Editor-Chefe, J. Building Pathology and Rehabilitation (Springer)</span></div>
+          <div class="info-row"><i class="fas fa-edit"></i><span data-i18n="editorial_2">Editor-Guest, Digital Applications in Archaeology and Cultural Heritage</span></div>
+          <div class="info-row"><i class="fas fa-users"></i><span>ICOMOS &amp; RILEM</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESEARCH ═════════════════════════════════════ -->
+<section id="research">
+  <div class="section-inner">
+    <h2 class="section-title" data-i18n="nav_research">Pesquisa</h2>
+    <div class="section-line"></div>
+    <div class="research-grid">
+      <div class="research-card">
+        <div class="research-icon"><i class="fas fa-landmark"></i></div>
+        <h3 data-i18n="res_1">Reparação, reforço, reabilitação e caracterização de construções históricas</h3>
+      </div>
+      <div class="research-card">
+        <div class="research-icon"><i class="fas fa-search"></i></div>
+        <h3 data-i18n="res_2">Caracterização não destrutiva de materiais e estruturas</h3>
+      </div>
+      <div class="research-card">
+        <div class="research-icon"><i class="fas fa-cubes"></i></div>
+        <h3 data-i18n="res_3">Durabilidade de materiais e componentes de construção</h3>
+      </div>
+      <div class="research-card">
+        <div class="research-icon"><i class="fas fa-heartbeat"></i></div>
+        <h3 data-i18n="res_4">Monitoramento de integridade estrutural (SHM)</h3>
+      </div>
+      <div class="research-card">
+        <div class="research-icon"><i class="fas fa-cube"></i></div>
+        <h3 data-i18n="res_5">HBIM e digitalização do patrimônio histórico</h3>
+      </div>
+      <div class="research-card">
+        <div class="research-icon"><i class="fas fa-cloud-sun-rain"></i></div>
+        <h3 data-i18n="res_6">Impactos das mudanças climáticas no patrimônio cultural</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PUBLICATIONS ══════════════════════════════════ -->
+<section id="publications">
+  <div class="section-inner">
+    <h2 class="section-title" data-i18n="nav_publications">Publicações</h2>
+    <div class="section-line"></div>
+
+    <!-- BOOKS -->
+    <h3 class="pub-sub-title" data-i18n="pub_books_title">Livros Publicados</h3>
+    <ul class="pub-list books-list">
+      <li class="pub-item">
+        <div class="pub-num book-num"><i class="fas fa-book"></i></div>
+        <div>
+          <div class="pub-title">
+            Engenharia do Patrimônio
+            <a href="https://www.amazon.com.br/ENGENHARIA-PATRIM%C3%94NIO-Esequiel-Fernandes-Teixeira/dp/8574564737/ref=sr_1_1?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=11Q1GPUXDFCYU&dib=eyJ2IjoiMSJ9.ISgEYejrr21-US1jUrvGo6V2pdIaXzQVlPH-kGgA4uD74h9W3fmGBun7HlGcy3UR_pPNm5w2-_e3SzcEG7CSt6lq7WrkurhlcMqBjMNdVv7-UrJ_OiUo5dzwUNVxRQOlLUEEaZjEmsXaV4ndbq9_wxSsJRY1pk2mEWXHezWN3V4oVks4nAnNqKKdzqEQbcjBQ0CgPKySGDy5Da0-LOs0w9K0MZQrXfwYFdm8jrsXxLgE3i3gayrL1poi-CeQHSi2RcsAPWEaZVoCRgPZBlK3zhXMny8NtFimRwXxRMY7SF4.42SBW-fQ-ze4Wx9-xbYD_A7Vxiz-ebPW_NvyolD3XPQ&dib_tag=se&keywords=engenharia+do+patrimonio&qid=1775518573&sprefix=engenharia+do+patrimonio%2Caps%2C261&sr=8-1&ufe=app_do%3Aamzn1.fos.6121c6c4-c969-43ae-92f7-cc248fc6181d" target="_blank" class="buy-btn"><i class="fab fa-amazon"></i> <span data-i18n="buy_btn">Comprar</span></a>
+          </div>
+          <div class="pub-authors">MESQUITA, E. F. T.</div>
+          <div class="pub-venue">Leud, São Paulo, 2. ed. <span class="pub-year">2025</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num book-num"><i class="fas fa-book"></i></div>
+        <div>
+          <div class="pub-title">Alvenarias Afetadas por Umidade e Sais</div>
+          <div class="pub-authors">GREVEN, H.; SEELE, J.; BERTINI, A.; MESQUITA, E.</div>
+          <div class="pub-venue">Leud, São Paulo, 1. ed., 352 p. <span class="pub-year">2022</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num book-num"><i class="fas fa-book"></i></div>
+        <div>
+          <div class="pub-title">Patologia das Edificações: manifestações nas edificações e no patrimônio histórico</div>
+          <div class="pub-authors">MARINHO, J. L. A.; MESQUITA, E. F. T.</div>
+          <div class="pub-venue">Leud, São Paulo, 1. ed., 264 p. <span class="pub-year">2020</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num book-num"><i class="fas fa-book"></i></div>
+        <div>
+          <div class="pub-title">Engenharia do Patrimônio</div>
+          <div class="pub-authors">MESQUITA, E.</div>
+          <div class="pub-venue">Editora Ithala, Curitiba, 1. ed., 184 p. <span class="pub-year">2019</span></div>
+        </div>
+      </li>
+    </ul>
+
+    <!-- ARTICLES -->
+    <h3 class="pub-sub-title" style="margin-top:40px;" data-i18n="pub_articles_title">Artigos em Periódicos (15 mais recentes)</h3>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <div class="pub-num">1</div>
+        <div>
+          <div class="pub-title">Improving the geometrical and texture of the digital representation of artefacts integrating point clouds, script and IA</div>
+          <div class="pub-authors">DA C. RIBEIRO, G.; BARBOSA, J. E. G.; LIMA, J. M.; MESQUITA, E.; VIEIRA, M. M.</div>
+          <div class="pub-venue">Journal of Building Pathology and Rehabilitation, v. 11, p. 77 <span class="pub-year">2026</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num">2</div>
+        <div>
+          <div class="pub-title">H-MCDM Model to the preservation of dynamic historic urban sites</div>
+          <div class="pub-authors">OLIMPIO, L. C. M.; CAMPOS, V. R.; MESQUITA, E. F. T.</div>
+          <div class="pub-venue">Built Heritage, v. 10, p. 1 <span class="pub-year">2026</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num">3</div>
+        <div>
+          <div class="pub-title">Using numerical simulations to assess the hygrothermal influence on the degradation of historic masonry under climate warming</div>
+          <div class="pub-authors">PINHEIRO, V. R. F.; VIEIRA, M. M.; MESQUITA, E.</div>
+          <div class="pub-venue">Journal of Building Pathology and Rehabilitation, v. 11, p. 116 <span class="pub-year">2026</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num">4</div>
+        <div>
+          <div class="pub-title">Analysis of the dispersion of carbon nanotubes in soil-cement composites for different types and concentrations of polycarboxylate superplasticizers</div>
+          <div class="pub-authors">CARNEIRO VASCONCELOS, A. R.; MATOS, R. A.; PITOMBEIRA, N.; SILVEIRA, M. V.; MOURÃO, L. P.; BARBOSA COSTA, L. C.; LEDOUX, A.; MESQUITA, E.</div>
+          <div class="pub-venue">Journal of Building Engineering, v. 111, p. 113131 <span class="pub-year">2025</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num">5</div>
+        <div>
+          <div class="pub-title">Physico-mechanical and electrical characterization of mortars enhanced with carbon nanotubes and microfibers</div>
+          <div class="pub-authors">MATOS, R. A.; SANTOS, M. S.; CRUZ DE ARAÚJO, A. J.; MESQUITA, E.; TRIANA-CAMACHO, D. A.; D'ALESSANDRO, A.; UBERTINI, F.</div>
+          <div class="pub-venue">Construction and Building Materials, v. 494, p. 143537 <span class="pub-year">2025</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num">6</div>
+        <div>
+          <div class="pub-title">An Integrated HBIM Protocol for Digital Documentation, Management, and Reconstruction of Historic Heritage Structures</div>
+          <div class="pub-authors">RIBEIRO, G. C.; VIEIRA, M. M.; MESQUITA, E.; MOREIRA, E.; TUCCI, G.</div>
+          <div class="pub-venue">Journal of Building Engineering, v. 1, p. 114920 <span class="pub-year">2025</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num">7</div>
+        <div>
+          <div class="pub-title">Detecting anomalies in buildings using digital surveys with point cloud data: a practical application</div>
+          <div class="pub-authors">FIDELES, B.; DE OLIVEIRA, A.; BESSA, M.; CABRAL, E.; MESQUITA, E.</div>
+          <div class="pub-venue">Journal of Building Pathology and Rehabilitation, v. 10, p. 10 <span class="pub-year">2025</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num">8</div>
+        <div>
+          <div class="pub-title">FBG-Based Accelerometer for Buried Pipeline Natural Frequency Monitoring and Corrosion Detection</div>
+          <div class="pub-authors">PEREIRA, L.; SOUSA, I.; MESQUITA, E.; CABRAL, A.; ALBERTO, N.; DIAZ, C.; VARUM, H.; ANTUNES, P.</div>
+          <div class="pub-venue">Buildings, v. 14, p. 456 <span class="pub-year">2024</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num">9</div>
+        <div>
+          <div class="pub-title">Evaluation of the influence of climatic changes on the degradation of the historic buildings</div>
+          <div class="pub-authors">PINHEIRO, V. R. F.; FONTENELE, R.; MAGALHÃES, A.; FROTA, N.; MESQUITA, E.</div>
+          <div class="pub-venue">Energy and Buildings, v. 323, p. 114813 <span class="pub-year">2024</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num">10</div>
+        <div>
+          <div class="pub-title">Applications of Smart and Self-Sensing Materials for Structural Health Monitoring in Civil Engineering: A Systematic Review</div>
+          <div class="pub-authors">VASCONCELOS, A. R. C.; MATOS, R. A.; SILVEIRA, M. V.; MESQUITA, E.</div>
+          <div class="pub-venue">Buildings, v. 14, p. 2345 <span class="pub-year">2024</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num">11</div>
+        <div>
+          <div class="pub-title">Comprehensive review of 3D printed cementitious composites with carbon inclusions: Current Status and perspective for self-sensing capabilities</div>
+          <div class="pub-authors">SOUSA, I.; D'ALESSANDRO, A.; MESQUITA, E.; LAFLAMME, S.; UBERTINI, F.</div>
+          <div class="pub-venue">Journal of Building Engineering, v. 98, p. 111192 <span class="pub-year">2024</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num">12</div>
+        <div>
+          <div class="pub-title">Semi-automatic scan-to-BIM procedure applied to architectural ornaments of Nossa Senhora do Rosário Church, Aracati-CE</div>
+          <div class="pub-authors">VIEIRA, M. M.; GONÇALVES, J. E.; DE O. SILVA, D. M.; MESQUITA, E. F. T.; LIMA, J. M.</div>
+          <div class="pub-venue">Journal of Building Pathology and Rehabilitation, v. 9, p. 75 <span class="pub-year">2024</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num">13</div>
+        <div>
+          <div class="pub-title">A vulnerability index formulation for historic facades assessment</div>
+          <div class="pub-authors">FONTENELE, A.; CAMPOS, V.; MATOS, A. M.; MESQUITA, E.</div>
+          <div class="pub-venue">Journal of Building Engineering, v. 64, p. 105552 <span class="pub-year">2023</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num">14</div>
+        <div>
+          <div class="pub-title">Strategy for HBIM implementation using high-resolution 3D architectural documentation based on laser scanning and photogrammetry of the José de Alencar theatre</div>
+          <div class="pub-authors">VIEIRA, M. M.; RIBEIRO, G.; PAULO, R.; BESSA, M.; SOUSA, F. R.; MOREIRA, E.; MESQUITA, E.</div>
+          <div class="pub-venue">Digital Applications in Archaeology and Cultural Heritage, p. e00287 <span class="pub-year">2023</span></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-num">15</div>
+        <div>
+          <div class="pub-title">Investigation of the electrical sensing properties of cementitious composites produced with multi-wall carbon nanotubes dispersed in NaOH</div>
+          <div class="pub-authors">MESQUITA, E.; SOUSA, I.; VIEIRA, M.; MATOS, A. M.; SANTOS, L. P. M.; D'ALESSANDRO, A.; UBERTINI, F.</div>
+          <div class="pub-venue">Journal of Building Engineering, v. 77, p. 107496 <span class="pub-year">2023</span></div>
+        </div>
+      </li>
+    </ul>
+    <a href="http://lattes.cnpq.br/3585259598740974" target="_blank" class="view-more">
+      <i class="fas fa-external-link-alt"></i>
+      <span data-i18n="pub_view_more">Ver lista completa no Lattes (120+ publicações)</span>
+    </a>
+  </div>
+</section>
+
+<!-- ══ EDUCATION ════════════════════════════════════ -->
+<section id="education">
+  <div class="section-inner">
+    <h2 class="section-title" data-i18n="nav_education">Formação Acadêmica</h2>
+    <div class="section-line"></div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2024</div>
+        <div class="timeline-title" data-i18n="edu_1_title">Pós-Doutorado em Engenharia do Patrimônio</div>
+        <div class="timeline-institution" data-i18n="edu_1_inst">Università di Pisa, Itália · Bolsista FUNCAP</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2014 – 2018</div>
+        <div class="timeline-title" data-i18n="edu_2_title">Doutorado em Engenharia Civil</div>
+        <div class="timeline-institution" data-i18n="edu_2_inst">Universidade do Porto, Portugal · Bolsista CAPES</div>
+        <div class="timeline-detail" data-i18n="edu_2_detail"><em>Structural characterization and monitoring of heritage constructions</em> · Orientador: Prof. Humberto Varum</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2017 – 2018</div>
+        <div class="timeline-title" data-i18n="edu_3_title">Pós-Doutorado em Monitoramento Estrutural</div>
+        <div class="timeline-institution">Università degli Studi di Firenze, Itália</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2008 – 2012</div>
+        <div class="timeline-title" data-i18n="edu_4_title">Graduação em Engenharia Civil</div>
+        <div class="timeline-institution" data-i18n="edu_4_inst">Universidade Estadual Vale do Acaraú (UVA-CE), Brasil · Bolsista FUNCAP</div>
+        <div class="timeline-detail" data-i18n="edu_4_detail"><em>Durabilidade do concreto autoadensável com incorporação do pó de Carnaúba</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECTS ══════════════════════════════════════ -->
+<section id="projects">
+  <div class="section-inner">
+    <h2 class="section-title" data-i18n="nav_projects">Projetos de Pesquisa</h2>
+    <div class="section-line"></div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-badge badge-active"><i class="fas fa-circle" style="font-size:.5rem"></i> <span data-i18n="badge_active">Em andamento</span></div>
+        <h3 data-i18n="proj_1_title">Estratégias multi-paramétricas com integração HBIM para gestão e mudanças climáticas no patrimônio cultural</h3>
+        <p data-i18n="proj_1_desc">Avaliação e mitigação dos impactos climáticos em edificações históricas utilizando HBIM, monitoramento climático e materiais de nova geração.</p>
+        <div class="project-funder"><i class="fas fa-hand-holding-usd"></i> CNPq (402828/2024-0)</div>
+      </div>
+      <div class="project-card">
+        <div class="project-badge badge-active"><i class="fas fa-circle" style="font-size:.5rem"></i> <span data-i18n="badge_active">Em andamento</span></div>
+        <h3 data-i18n="proj_2_title">Experiências virtuais imersivas do patrimônio cultural em sinergia com medições ambientais — Gêmeos Digitais</h3>
+        <p data-i18n="proj_2_desc">Framework integrado com dados microclimáticos em tempo real dentro de modelos HBIM para gerenciamento e visualização de sítios patrimoniais.</p>
+        <div class="project-funder"><i class="fas fa-hand-holding-usd"></i> CNPq (440926/2024-6)</div>
+      </div>
+      <div class="project-card">
+        <div class="project-badge badge-active"><i class="fas fa-circle" style="font-size:.5rem"></i> <span data-i18n="badge_active">Em andamento</span></div>
+        <h3 data-i18n="proj_3_title">Cientista Chefe Cultura: Inovação e Tecnologia para o Patrimônio Cultural do Ceará</h3>
+        <p data-i18n="proj_3_desc">Preservação, valorização e dinamização econômica do patrimônio histórico cearense mediante levantamentos digitais, modelos 3D e ferramentas HBIM.</p>
+        <div class="project-funder"><i class="fas fa-hand-holding-usd"></i> FUNCAP</div>
+      </div>
+      <div class="project-card">
+        <div class="project-badge badge-active"><i class="fas fa-circle" style="font-size:.5rem"></i> <span data-i18n="badge_active">Em andamento</span></div>
+        <h3 data-i18n="proj_4_title">Manutenção dos acervos culturais da UFC — Modernização digital (Finep 2896/24)</h3>
+        <p data-i18n="proj_4_desc">Modernização e requalificação do acervo do MAUC/UFC, com escaneamento 3D de alta resolução e técnicas de fotogrametria para preservação digital.</p>
+        <div class="project-funder"><i class="fas fa-hand-holding-usd"></i> FINEP</div>
+      </div>
+      <div class="project-card">
+        <div class="project-badge badge-completed"><i class="fas fa-check-circle" style="font-size:.6rem"></i> <span data-i18n="badge_completed">Concluído</span></div>
+        <h3 data-i18n="proj_5_title">ENERGYSMART — Advanced management tools for environmental impacts mitigation</h3>
+        <p data-i18n="proj_5_desc">Projeto internacional Brasil–França para desenvolvimento de tecnologias em energia verde, materiais sensores para SHM e ferramentas de mitigação ambiental.</p>
+        <div class="project-funder"><i class="fas fa-hand-holding-usd"></i> FUNCAP · UFC – INSA Rouen</div>
+      </div>
+      <div class="project-card">
+        <div class="project-badge badge-completed"><i class="fas fa-check-circle" style="font-size:.6rem"></i> <span data-i18n="badge_completed">Concluído</span></div>
+        <h3 data-i18n="proj_6_title">Desenvolvimento de nanosensores à base de nanotubos de carbono para monitoramento estrutural</h3>
+        <p data-i18n="proj_6_desc">Compósitos cimentícios com nanotubos de carbono (NTC) para sistemas de monitoramento descentralizado de estruturas de concreto armado.</p>
+        <div class="project-funder"><i class="fas fa-hand-holding-usd"></i> CNPq</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AWARDS ════════════════════════════════════════ -->
+<section id="awards">
+  <div class="section-inner">
+    <h2 class="section-title" data-i18n="nav_awards">Prêmios e Reconhecimentos</h2>
+    <div class="section-line"></div>
+    <ul class="awards-list">
+      <li class="award-item">
+        <div class="award-year">2021</div>
+        <div><div class="award-title" data-i18n="award_1">Editorial Excellence</div><div class="award-org">Springer Nature</div></div>
+      </li>
+      <li class="award-item">
+        <div class="award-year">2020</div>
+        <div><div class="award-title" data-i18n="award_2">Editorial Excellence</div><div class="award-org">Springer Nature</div></div>
+      </li>
+      <li class="award-item">
+        <div class="award-year">2016</div>
+        <div><div class="award-title" data-i18n="award_3">Best Young Researcher Paper</div><div class="award-org" data-i18n="award_3_org">International Conference on Structural Repair and Building Pathology</div></div>
+      </li>
+      <li class="award-item">
+        <div class="award-year">2016</div>
+        <div><div class="award-title" data-i18n="award_4">Finalista Nacional — Prêmio Rodrigo Franco de Melo Andrade</div><div class="award-org">IPHAN</div></div>
+      </li>
+      <li class="award-item">
+        <div class="award-year">2015</div>
+        <div><div class="award-title" data-i18n="award_5">Semifinalista — Everis Award</div><div class="award-org" data-i18n="award_5_org">Everis Foundation, Espanha</div></div>
+      </li>
+      <li class="award-item">
+        <div class="award-year">2013</div>
+        <div><div class="award-title" data-i18n="award_6">Melhor Trabalho — Patologia de Edificações Históricas</div><div class="award-org" data-i18n="award_6_org">CINPAR 2013 — Congresso Internacional de Patologia e Recuperação de Estruturas</div></div>
+      </li>
+      <li class="award-item">
+        <div class="award-year">2009</div>
+        <div><div class="award-title" data-i18n="award_7">1º Lugar — XI Encontro de Iniciação Científica (Engenharias)</div><div class="award-org">Universidade Estadual Vale do Acaraú</div></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══ ATENDIMENTOS ══════════════════════════════════ -->
+<section id="atendimentos">
+  <div class="section-inner">
+    <h2 class="section-title" data-i18n="nav_atendimentos">Atendimentos</h2>
+    <div class="section-line"></div>
+    <div class="atend-grid">
+      <div class="atend-text">
+        <p data-i18n="atend_p1">Esses são os horários disponíveis para orientações e conversas com alunos de graduação, mestrado e doutorado.</p>
+        <div class="atend-policy-card">
+          <div class="atend-policy-icon"><i class="fas fa-door-open"></i></div>
+          <div>
+            <h3 data-i18n="atend_policy_title">Política Open Door</h3>
+            <p data-i18n="atend_p2">As portas estão sempre abertas para uma conversa com os estudantes e pesquisadores sem agendamento prévio, de acordo com minha disponibilidade. Estou sempre bem disposto para um café descontraído!</p>
+          </div>
+        </div>
+        <div class="atend-policy-card">
+          <div class="atend-policy-icon"><i class="fas fa-calendar-alt"></i></div>
+          <div>
+            <h3 data-i18n="atend_sched_title">Agendamento Preferencial</h3>
+            <p data-i18n="atend_p3">Para uma melhor organização, é preferível que as reuniões sejam agendadas com antecedência pela Agenda Virtual. Cada reunião terá até <strong>30 minutos</strong> de duração e pode ser realizada <strong>presencialmente</strong> ou por <strong>videoconferência</strong> (link gerado automaticamente).</p>
+          </div>
+        </div>
+        <div class="atend-policy-card">
+          <div class="atend-policy-icon"><i class="fas fa-map-pin"></i></div>
+          <div>
+            <h3 data-i18n="atend_local_title">Local Presencial</h3>
+            <p data-i18n="atend_p4">Os atendimentos presenciais serão realizados no <strong>LED/DAUD</strong> e cada atendimento deverá ser restrito a um horário por aluno.</p>
+          </div>
+        </div>
+        <a href="https://calendar.app.google/298iByYe3EmofB2k8" target="_blank" class="atend-btn">
+          <i class="fas fa-calendar-plus"></i>
+          <span data-i18n="atend_btn">Agendar pela Agenda Virtual</span>
+        </a>
+      </div>
+      <div class="atend-embed">
+        <div class="atend-embed-box">
+          <i class="fas fa-calendar-check atend-cal-icon"></i>
+          <p data-i18n="atend_cal_title">Agenda Virtual</p>
+          <p class="atend-cal-sub" data-i18n="atend_cal_sub">Clique para ver horários disponíveis e agendar</p>
+          <a href="https://calendar.app.google/298iByYe3EmofB2k8" target="_blank" class="atend-btn" style="margin-top:20px;">
+            <i class="fas fa-external-link-alt"></i>
+            <span data-i18n="atend_btn_open">Abrir agenda</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ════════════════════════════════════════ -->
+<section id="contact">
+  <div class="section-inner">
+    <h2 class="section-title" data-i18n="nav_contact">Contato</h2>
+    <div class="section-line"></div>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="fas fa-university"></i></div>
+          <div>
+            <h4 data-i18n="contact_inst_label">Instituição</h4>
+            <p data-i18n="contact_inst">Universidade Federal do Ceará (UFC)<br />Instituto de Arquitetura, Urbanismo e Design — IAUD</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div>
+            <h4 data-i18n="contact_addr_label">Endereço</h4>
+            <p data-i18n="contact_addr">Fortaleza, CE — Brasil<br />LED/DAUD — IAUD, UFC</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <h4 data-i18n="contact_email_label">E-mail</h4>
+            <a href="mailto:emesquita@ufc.br">emesquita@ufc.br</a><br />
+            <a href="mailto:mesquita.e@outlook.com" style="font-size:.82rem;opacity:.7;">mesquita.e@outlook.com</a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="fas fa-calendar-check"></i></div>
+          <div>
+            <h4 data-i18n="contact_hours_label">Atendimentos</h4>
+            <a href="https://calendar.app.google/298iByYe3EmofB2k8" target="_blank" data-i18n="contact_hours_link">Agendar reunião (até 30 min)</a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="color:rgba(255,255,255,.55);font-size:.875rem;margin-bottom:20px;" data-i18n="contact_profiles_label">Perfis acadêmicos e redes profissionais</p>
+        <div class="profiles-grid">
+          <a href="http://lattes.cnpq.br/3585259598740974" target="_blank" class="profile-link">
+            <i class="fas fa-graduation-cap"></i> Currículo Lattes
+          </a>
+          <a href="https://orcid.org/0000-0001-9905-6220" target="_blank" class="profile-link">
+            <i class="fab fa-orcid"></i> ORCID
+          </a>
+          <a href="https://www.scopus.com/authid/detail.uri?authorId=55655940800" target="_blank" class="profile-link">
+            <i class="fas fa-book-open"></i> Scopus
+          </a>
+          <a href="https://www.researchgate.net/profile/Esequiel-Mesquita" target="_blank" class="profile-link">
+            <i class="fab fa-researchgate"></i> ResearchGate
+          </a>
+          <a href="https://iaud.ufc.br" target="_blank" class="profile-link">
+            <i class="fas fa-globe"></i> UFC – IAUD
+          </a>
+          <a href="https://scholar.google.com/citations?user=esequiel" target="_blank" class="profile-link">
+            <i class="fab fa-google"></i> Google Scholar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════ -->
+<footer>
+  <p>© 2026 · Prof. Esequiel Fernandes Teixeira Mesquita · UFC – IAUD</p>
+  <p style="margin-top:6px;" data-i18n="footer_updated">Última atualização do currículo Lattes: 25/03/2026</p>
+</footer>
+
+<!-- ══ I18N SCRIPT ════════════════════════════════════ -->
+<script>
+const i18n = {
+  pt: {
+    nav_about: "Sobre",
+    nav_research: "Pesquisa",
+    nav_publications: "Publicações",
+    nav_education: "Formação",
+    nav_projects: "Projetos",
+    nav_awards: "Prêmios",
+    nav_contact: "Contato",
+    hero_badge: "Bolsista de Produtividade em Pesquisa CNPq — Nível 2",
+    hero_role: "Professor Adjunto",
+    hero_dept: "Instituto de Arquitetura, Urbanismo e Design (IAUD)",
+    hero_uni: "Universidade Federal do Ceará — UFC",
+    hero_editor: "Editor-Chefe · <em>Journal of Building Pathology and Rehabilitation</em> (Springer)",
+    hero_btn_lattes: "Currículo Lattes",
+    hero_btn_contact: "Contato",
+    stat_pubs: "Publicações",
+    stat_intl: "Artigos Internacionais",
+    stat_years: "Anos de Docência (UFC)",
+    stat_langs: "Idiomas",
+    stat_projects: "Projetos de Pesquisa",
+    about_p1: "Esequiel Mesquita é Professor do Instituto de Arquitetura, Urbanismo e Design (IAUD) e Coordenador do Programa de Pós-Graduação em Engenharia Civil da Universidade Federal do Ceará (UFC). Possui doutorado em Engenharia Civil pela Faculdade de Engenharia da Universidade do Porto e foi Professor Visitante no Institut National des Sciences Appliquées de Rouen (França, 2023) e na Universidade de Pisa (2024).",
+    about_p2: "É Editor-Chefe do <em>Journal of Building Pathology and Rehabilitation</em> (Springer) e Editor-Guest do <em>Digital Applications in Archaeology and Cultural Heritage</em>. Membro especialista do ICOMOS e da RILEM, está envolvido em vários projetos nacionais e internacionais, com fortes colaborações na América do Sul e Europa.",
+    about_p3: "Coordena o projeto <strong>Tecnologia e Inovação do Patrimônio Cultural do Ceará</strong> (FUNCAP), que promove levantamentos digitais, modelos 3D para preservação e documentação, e ferramentas inovadoras de HBIM. Sua pesquisa contempla patologia de edificações, monitoramento estrutural, patrimônio cultural, digitalização, HBIM, vulnerabilidade estrutural e mitigação de riscos de mudanças climáticas no contexto do patrimônio histórico.",
+    about_p4: "Suas contribuições acadêmicas incluem mais de 120 publicações, incluindo mais de 50 artigos em importantes revistas internacionais, além de ter orientado e co-orientado alunos de graduação, mestrado e doutorado.",
+    sidebar_contact_title: "Contato e Perfis",
+    sidebar_inst: "UFC – IAUD",
+    sidebar_loc: "Fortaleza, Ceará, Brasil",
+    sidebar_langs_title: "Idiomas",
+    lang_pt: "Português — Nativo",
+    lang_en: "Inglês — Fluente",
+    lang_es: "Espanhol — Fluente",
+    lang_it: "Italiano — Intermediário",
+    sidebar_editorial_title: "Atividade Editorial",
+    editorial_1: "Editor-Chefe, J. Building Pathology and Rehabilitation (Springer)",
+    editorial_2: "Editor-Guest, Digital Applications in Archaeology and Cultural Heritage",
+    res_1: "Reparação, reforço, reabilitação e caracterização de construções históricas",
+    res_2: "Caracterização não destrutiva de materiais e estruturas",
+    res_3: "Durabilidade de materiais e componentes de construção",
+    res_4: "Monitoramento de integridade estrutural (SHM)",
+    res_5: "HBIM e digitalização do patrimônio histórico",
+    res_6: "Impactos das mudanças climáticas no patrimônio cultural",
+    buy_btn: "Comprar",
+    pub_books_title: "Livros Publicados",
+    pub_articles_title: "Artigos em Periódicos (15 mais recentes)",
+    pub_view_more: "Ver lista completa no Lattes (120+ publicações)",
+    edu_1_title: "Pós-Doutorado em Engenharia do Patrimônio",
+    edu_1_inst: "Università di Pisa, Itália · Bolsista FUNCAP",
+    edu_2_title: "Doutorado em Engenharia Civil",
+    edu_2_inst: "Universidade do Porto, Portugal · Bolsista CAPES",
+    edu_2_detail: "<em>Structural characterization and monitoring of heritage constructions</em> · Orientador: Prof. Humberto Varum",
+    edu_3_title: "Pós-Doutorado em Monitoramento Estrutural",
+    edu_4_title: "Graduação em Engenharia Civil",
+    edu_4_inst: "Universidade Estadual Vale do Acaraú (UVA-CE), Brasil · Bolsista FUNCAP",
+    edu_4_detail: "<em>Durabilidade do concreto autoadensável com incorporação do pó de Carnaúba</em>",
+    badge_active: "Em andamento",
+    badge_completed: "Concluído",
+    proj_1_title: "Estratégias multi-paramétricas com integração HBIM para gestão e mudanças climáticas no patrimônio cultural",
+    proj_1_desc: "Avaliação e mitigação dos impactos climáticos em edificações históricas utilizando HBIM, monitoramento climático e materiais de nova geração.",
+    proj_2_title: "Experiências virtuais imersivas do patrimônio cultural em sinergia com medições ambientais — Gêmeos Digitais",
+    proj_2_desc: "Framework integrado com dados microclimáticos em tempo real dentro de modelos HBIM para gerenciamento e visualização de sítios patrimoniais.",
+    proj_3_title: "Cientista Chefe Cultura: Inovação e Tecnologia para o Patrimônio Cultural do Ceará",
+    proj_3_desc: "Preservação, valorização e dinamização econômica do patrimônio histórico cearense mediante levantamentos digitais, modelos 3D e ferramentas HBIM.",
+    proj_4_title: "Manutenção dos acervos culturais da UFC — Modernização digital (Finep 2896/24)",
+    proj_4_desc: "Modernização e requalificação do acervo do MAUC/UFC, com escaneamento 3D de alta resolução e técnicas de fotogrametria para preservação digital.",
+    proj_5_title: "ENERGYSMART — Advanced management tools for environmental impacts mitigation",
+    proj_5_desc: "Projeto internacional Brasil–França para desenvolvimento de tecnologias em energia verde, materiais sensores para SHM e ferramentas de mitigação ambiental.",
+    proj_6_title: "Desenvolvimento de nanosensores à base de nanotubos de carbono para monitoramento estrutural",
+    proj_6_desc: "Compósitos cimentícios com nanotubos de carbono (NTC) para sistemas de monitoramento descentralizado de estruturas de concreto armado.",
+    award_1: "Editorial Excellence",
+    award_2: "Editorial Excellence",
+    award_3: "Best Young Researcher Paper",
+    award_3_org: "International Conference on Structural Repair and Building Pathology",
+    award_4: "Finalista Nacional — Prêmio Rodrigo Franco de Melo Andrade",
+    award_5: "Semifinalista — Everis Award",
+    award_5_org: "Everis Foundation, Espanha",
+    award_6: "Melhor Trabalho — Patologia de Edificações Históricas",
+    award_6_org: "CINPAR 2013 — Congresso Internacional de Patologia e Recuperação de Estruturas",
+    award_7: "1º Lugar — XI Encontro de Iniciação Científica (Engenharias)",
+    contact_inst_label: "Instituição",
+    contact_inst: "Universidade Federal do Ceará (UFC)<br />Instituto de Arquitetura, Urbanismo e Design — IAUD",
+    contact_addr_label: "Endereço",
+    contact_addr: "Fortaleza, CE — Brasil<br />LED/DAUD — IAUD, UFC",
+    contact_email_label: "E-mail",
+    contact_hours_label: "Atendimentos",
+    contact_hours_link: "Agendar reunião (até 30 min)",
+    contact_profiles_label: "Perfis acadêmicos e redes profissionais",
+    footer_updated: "Última atualização do currículo Lattes: 25/03/2026",
+    nav_atendimentos: "Atendimentos",
+    atend_p1: "Esses são os horários disponíveis para orientações e conversas com alunos de graduação, mestrado e doutorado.",
+    atend_policy_title: "Política Open Door",
+    atend_p2: "As portas estão sempre abertas para uma conversa com os estudantes e pesquisadores sem agendamento prévio, de acordo com minha disponibilidade. Estou sempre bem disposto para um café descontraído!",
+    atend_sched_title: "Agendamento Preferencial",
+    atend_p3: "Para uma melhor organização, é preferível que as reuniões sejam agendadas com antecedência pela Agenda Virtual. Cada reunião terá até <strong>30 minutos</strong> de duração e pode ser realizada <strong>presencialmente</strong> ou por <strong>videoconferência</strong> (link gerado automaticamente).",
+    atend_local_title: "Local Presencial",
+    atend_p4: "Os atendimentos presenciais serão realizados no <strong>LED/DAUD</strong> e cada atendimento deverá ser restrito a um horário por aluno.",
+    atend_btn: "Agendar pela Agenda Virtual",
+    atend_cal_title: "Agenda Virtual",
+    atend_cal_sub: "Clique para ver horários disponíveis e agendar",
+    atend_btn_open: "Abrir agenda",
+  },
+
+  en: {
+    nav_about: "About",
+    nav_research: "Research",
+    nav_publications: "Publications",
+    nav_education: "Education",
+    nav_projects: "Projects",
+    nav_awards: "Awards",
+    nav_contact: "Contact",
+    hero_badge: "CNPq Research Productivity Fellow — Level 2",
+    hero_role: "Associate Professor",
+    hero_dept: "Institute of Architecture, Urbanism and Design (IAUD)",
+    hero_uni: "Federal University of Ceará — UFC",
+    hero_editor: "Editor-in-Chief · <em>Journal of Building Pathology and Rehabilitation</em> (Springer)",
+    hero_btn_lattes: "Lattes CV",
+    hero_btn_contact: "Contact",
+    stat_pubs: "Publications",
+    stat_intl: "International Articles",
+    stat_years: "Years of Teaching (UFC)",
+    stat_langs: "Languages",
+    stat_projects: "Research Projects",
+    about_p1: "Esequiel Mesquita is a Professor at the Institute of Architecture, Urbanism and Design (IAUD) and Coordinator of the Graduate Program in Civil Engineering at the Federal University of Ceará (UFC). He holds a PhD in Civil Engineering from the Faculty of Engineering of the University of Porto and was a Visiting Professor at the Institut National des Sciences Appliquées de Rouen (France, 2023) and at the University of Pisa (2024).",
+    about_p2: "He is Editor-in-Chief of the <em>Journal of Building Pathology and Rehabilitation</em> (Springer) and Guest Editor of <em>Digital Applications in Archaeology and Cultural Heritage</em>. A specialist member of ICOMOS and RILEM, he is involved in several national and international projects, with strong collaborations in South America and Europe.",
+    about_p3: "He coordinates the project <strong>Technology and Innovation for Cultural Heritage of Ceará</strong> (FUNCAP), which promotes digital surveys, 3D models for preservation and documentation, and innovative HBIM tools. His research encompasses building pathology, structural monitoring, cultural heritage, digitalization, HBIM, structural vulnerability, and climate change risk mitigation in the context of historic heritage.",
+    about_p4: "His academic contributions include more than 120 publications, including over 50 articles in leading international journals, in addition to supervising undergraduate, master's, and doctoral students.",
+    sidebar_contact_title: "Contact & Profiles",
+    sidebar_inst: "UFC – IAUD",
+    sidebar_loc: "Fortaleza, Ceará, Brazil",
+    sidebar_langs_title: "Languages",
+    lang_pt: "Portuguese — Native",
+    lang_en: "English — Fluent",
+    lang_es: "Spanish — Fluent",
+    lang_it: "Italian — Intermediate",
+    sidebar_editorial_title: "Editorial Activity",
+    editorial_1: "Editor-in-Chief, J. Building Pathology and Rehabilitation (Springer)",
+    editorial_2: "Guest Editor, Digital Applications in Archaeology and Cultural Heritage",
+    res_1: "Repair, reinforcement, rehabilitation and characterisation of heritage constructions",
+    res_2: "Non-destructive characterisation of materials and structures",
+    res_3: "Durability of building materials and components",
+    res_4: "Structural Health Monitoring (SHM)",
+    res_5: "HBIM and digitalization of historic heritage",
+    res_6: "Climate change impacts on cultural heritage",
+    buy_btn: "Buy",
+    pub_books_title: "Published Books",
+    pub_articles_title: "Journal Articles (15 most recent)",
+    pub_view_more: "View full list on Lattes (120+ publications)",
+    edu_1_title: "Post-Doctorate in Heritage Engineering",
+    edu_1_inst: "Università di Pisa, Italy · FUNCAP Fellow",
+    edu_2_title: "PhD in Civil Engineering",
+    edu_2_inst: "University of Porto, Portugal · CAPES Fellow",
+    edu_2_detail: "<em>Structural characterization and monitoring of heritage constructions</em> · Supervisor: Prof. Humberto Varum",
+    edu_3_title: "Post-Doctorate in Structural Monitoring",
+    edu_4_title: "BSc in Civil Engineering",
+    edu_4_inst: "Universidade Estadual Vale do Acaraú (UVA-CE), Brazil · FUNCAP Fellow",
+    edu_4_detail: "<em>Durability of self-compacting concrete with incorporation of Carnaúba powder</em>",
+    badge_active: "Ongoing",
+    badge_completed: "Completed",
+    proj_1_title: "Multi-parametric strategies with HBIM integration for performance management and climate change mitigation in cultural heritage",
+    proj_1_desc: "Assessment and mitigation of climate impacts on historic buildings using HBIM, climate monitoring and next-generation materials.",
+    proj_2_title: "Immersive virtual experiences of cultural heritage in synergy with local environmental measurements — Digital Twins",
+    proj_2_desc: "Integrated framework leveraging real-time microclimatic data within HBIM models for data management and visualization of heritage sites.",
+    proj_3_title: "Chief Scientist Culture: Innovation and Technology for Cultural Heritage of Ceará",
+    proj_3_desc: "Preservation, valorisation and economic development of Ceará's historic heritage through digital surveys, 3D models and HBIM tools.",
+    proj_4_title: "Maintenance of UFC cultural collections — Digital modernization (Finep 2896/24)",
+    proj_4_desc: "Modernisation of the MAUC/UFC collection with high-resolution 3D scanning and photogrammetry techniques for digital preservation.",
+    proj_5_title: "ENERGYSMART — Advanced management tools for environmental impacts mitigation",
+    proj_5_desc: "International Brazil–France project for the development of green energy technologies, sensing materials for SHM and environmental mitigation tools.",
+    proj_6_title: "Development of carbon nanotube-based nanosensors for structural monitoring in civil engineering",
+    proj_6_desc: "Cementitious composites with carbon nanotubes (CNT) for decentralised monitoring systems of reinforced concrete structures.",
+    award_1: "Editorial Excellence",
+    award_2: "Editorial Excellence",
+    award_3: "Best Young Researcher Paper",
+    award_3_org: "International Conference on Structural Repair and Building Pathology",
+    award_4: "National Finalist — Rodrigo Franco de Melo Andrade Award",
+    award_5: "Semi-finalist — Everis Award",
+    award_5_org: "Everis Foundation, Spain",
+    award_6: "Best Paper — Pathology of Historic Buildings",
+    award_6_org: "CINPAR 2013 — International Congress on Pathology and Structural Recovery",
+    award_7: "1st Place — XI Scientific Initiation Meeting (Engineering)",
+    contact_inst_label: "Institution",
+    contact_inst: "Federal University of Ceará (UFC)<br />Institute of Architecture, Urbanism and Design — IAUD",
+    contact_addr_label: "Address",
+    contact_addr: "Fortaleza, CE — Brazil<br />LED/DAUD — IAUD, UFC",
+    contact_email_label: "Email",
+    contact_hours_label: "Office Hours",
+    contact_hours_link: "Schedule a meeting (up to 30 min)",
+    contact_profiles_label: "Academic profiles and professional networks",
+    footer_updated: "Lattes CV last updated: 25/03/2026",
+    nav_atendimentos: "Office Hours",
+    atend_p1: "These are the available times for meetings and conversations with undergraduate, master's, and doctoral students.",
+    atend_policy_title: "Open Door Policy",
+    atend_p2: "The doors are always open for a conversation with students and researchers without prior scheduling, according to my availability. I am always happy to have a relaxed coffee!",
+    atend_sched_title: "Preferred Scheduling",
+    atend_p3: "For better organization, it is preferable that meetings be scheduled in advance through the Virtual Calendar. Each meeting will last up to <strong>30 minutes</strong> and can be held <strong>in person</strong> or via <strong>video conference</strong> (link generated automatically).",
+    atend_local_title: "In-person Location",
+    atend_p4: "In-person meetings will be held at <strong>LED/DAUD</strong> and each appointment should be restricted to one time slot per student.",
+    atend_btn: "Schedule via Virtual Calendar",
+    atend_cal_title: "Virtual Calendar",
+    atend_cal_sub: "Click to see available times and schedule",
+    atend_btn_open: "Open calendar",
+  },
+
+  es: {
+    nav_about: "Acerca",
+    nav_research: "Investigación",
+    nav_publications: "Publicaciones",
+    nav_education: "Formación",
+    nav_projects: "Proyectos",
+    nav_awards: "Premios",
+    nav_contact: "Contacto",
+    hero_badge: "Becario de Productividad en Investigación CNPq — Nivel 2",
+    hero_role: "Profesor Adjunto",
+    hero_dept: "Instituto de Arquitectura, Urbanismo y Diseño (IAUD)",
+    hero_uni: "Universidad Federal de Ceará — UFC",
+    hero_editor: "Editor en Jefe · <em>Journal of Building Pathology and Rehabilitation</em> (Springer)",
+    hero_btn_lattes: "Currículo Lattes",
+    hero_btn_contact: "Contacto",
+    stat_pubs: "Publicaciones",
+    stat_intl: "Artículos Internacionales",
+    stat_years: "Años de Docencia (UFC)",
+    stat_langs: "Idiomas",
+    stat_projects: "Proyectos de Investigación",
+    about_p1: "Esequiel Mesquita es Profesor del Instituto de Arquitectura, Urbanismo y Diseño (IAUD) y Coordinador del Programa de Posgrado en Ingeniería Civil de la Universidad Federal de Ceará (UFC). Es doctor en Ingeniería Civil por la Facultad de Ingeniería de la Universidad de Oporto y fue Profesor Visitante en el Institut National des Sciences Appliquées de Rouen (Francia, 2023) y en la Universidad de Pisa (2024).",
+    about_p2: "Es Editor en Jefe del <em>Journal of Building Pathology and Rehabilitation</em> (Springer) y Editor Invitado de <em>Digital Applications in Archaeology and Cultural Heritage</em>. Miembro especialista del ICOMOS y de la RILEM, participa en varios proyectos nacionales e internacionales, con sólidas colaboraciones en América del Sur y Europa.",
+    about_p3: "Coordina el proyecto <strong>Tecnología e Innovación para el Patrimonio Cultural de Ceará</strong> (FUNCAP), que promueve levantamientos digitales, modelos 3D para la preservación y documentación, y herramientas innovadoras de HBIM. Su investigación abarca patología de edificaciones, monitoreo estructural, patrimonio cultural, digitalización, HBIM, vulnerabilidad estructural y mitigación de riesgos del cambio climático en el contexto del patrimonio histórico.",
+    about_p4: "Sus contribuciones académicas incluyen más de 120 publicaciones, entre ellas más de 50 artículos en importantes revistas internacionales, además de haber dirigido y co-dirigido trabajos de grado, maestría y doctorado.",
+    sidebar_contact_title: "Contacto y Perfiles",
+    sidebar_inst: "UFC – IAUD",
+    sidebar_loc: "Fortaleza, Ceará, Brasil",
+    sidebar_langs_title: "Idiomas",
+    lang_pt: "Portugués — Nativo",
+    lang_en: "Inglés — Fluido",
+    lang_es: "Español — Fluido",
+    lang_it: "Italiano — Intermedio",
+    sidebar_editorial_title: "Actividad Editorial",
+    editorial_1: "Editor en Jefe, J. Building Pathology and Rehabilitation (Springer)",
+    editorial_2: "Editor Invitado, Digital Applications in Archaeology and Cultural Heritage",
+    res_1: "Reparación, refuerzo, rehabilitación y caracterización de construcciones históricas",
+    res_2: "Caracterización no destructiva de materiales y estructuras",
+    res_3: "Durabilidad de materiales y componentes de construcción",
+    res_4: "Monitoreo de integridad estructural (SHM)",
+    res_5: "HBIM y digitalización del patrimonio histórico",
+    res_6: "Impactos del cambio climático en el patrimonio cultural",
+    buy_btn: "Comprar",
+    pub_books_title: "Libros Publicados",
+    pub_articles_title: "Artículos en Revistas (15 más recientes)",
+    pub_view_more: "Ver lista completa en Lattes (más de 120 publicaciones)",
+    edu_1_title: "Postdoctorado en Ingeniería del Patrimonio",
+    edu_1_inst: "Università di Pisa, Italia · Becario FUNCAP",
+    edu_2_title: "Doctorado en Ingeniería Civil",
+    edu_2_inst: "Universidad de Oporto, Portugal · Becario CAPES",
+    edu_2_detail: "<em>Structural characterization and monitoring of heritage constructions</em> · Director: Prof. Humberto Varum",
+    edu_3_title: "Postdoctorado en Monitoreo Estructural",
+    edu_4_title: "Grado en Ingeniería Civil",
+    edu_4_inst: "Universidade Estadual Vale do Acaraú (UVA-CE), Brasil · Becario FUNCAP",
+    edu_4_detail: "<em>Durabilidad del concreto autocompactante con incorporación de polvo de Carnaúba</em>",
+    badge_active: "En curso",
+    badge_completed: "Concluido",
+    proj_1_title: "Estrategias multi-paramétricas con integración HBIM para la gestión y mitigación del cambio climático en el patrimonio cultural",
+    proj_1_desc: "Evaluación y mitigación de los impactos climáticos en edificios históricos utilizando HBIM, monitoreo climático y materiales de nueva generación.",
+    proj_2_title: "Experiencias virtuales inmersivas del patrimonio cultural en sinergia con mediciones ambientales — Gemelos Digitales",
+    proj_2_desc: "Framework integrado con datos microclimáticos en tiempo real dentro de modelos HBIM para la gestión y visualización de sitios patrimoniales.",
+    proj_3_title: "Científico Jefe Cultura: Innovación y Tecnología para el Patrimonio Cultural de Ceará",
+    proj_3_desc: "Preservación, valorización y dinamización económica del patrimonio histórico cearense mediante levantamientos digitales, modelos 3D y herramientas HBIM.",
+    proj_4_title: "Mantenimiento de los acervos culturales de la UFC — Modernización digital (Finep 2896/24)",
+    proj_4_desc: "Modernización y recalificación del acervo del MAUC/UFC con escaneo 3D de alta resolución y técnicas de fotogrametría para la preservación digital.",
+    proj_5_title: "ENERGYSMART — Herramientas avanzadas para la mitigación de impactos ambientales",
+    proj_5_desc: "Proyecto internacional Brasil–Francia para el desarrollo de tecnologías de energía verde, materiales sensores para SHM y herramientas de mitigación ambiental.",
+    proj_6_title: "Desarrollo de nanosensores a base de nanotubos de carbono para el monitoreo estructural",
+    proj_6_desc: "Composites cementícios con nanotubos de carbono (NTC) para sistemas de monitoreo descentralizado de estructuras de concreto armado.",
+    award_1: "Editorial Excellence",
+    award_2: "Editorial Excellence",
+    award_3: "Best Young Researcher Paper",
+    award_3_org: "International Conference on Structural Repair and Building Pathology",
+    award_4: "Finalista Nacional — Premio Rodrigo Franco de Melo Andrade",
+    award_5: "Semifinalista — Everis Award",
+    award_5_org: "Everis Foundation, España",
+    award_6: "Mejor Trabajo — Patología de Edificaciones Históricas",
+    award_6_org: "CINPAR 2013 — Congreso Internacional de Patología y Recuperación de Estructuras",
+    award_7: "1.er Lugar — XI Encuentro de Iniciación Científica (Ingeniería)",
+    contact_inst_label: "Institución",
+    contact_inst: "Universidad Federal de Ceará (UFC)<br />Instituto de Arquitectura, Urbanismo y Diseño — IAUD",
+    contact_addr_label: "Dirección",
+    contact_addr: "Fortaleza, CE — Brasil<br />LED/DAUD — IAUD, UFC",
+    contact_email_label: "Correo electrónico",
+    contact_hours_label: "Horario de Atención",
+    contact_hours_link: "Agendar reunión (hasta 30 min)",
+    contact_profiles_label: "Perfiles académicos y redes profesionales",
+    footer_updated: "Última actualización del CV Lattes: 25/03/2026",
+    nav_atendimentos: "Atención",
+    atend_p1: "Estos son los horarios disponibles para orientaciones y conversaciones con alumnos de grado, maestría y doctorado.",
+    atend_policy_title: "Política Open Door",
+    atend_p2: "Las puertas siempre están abiertas para una conversación con estudiantes e investigadores sin cita previa, según mi disponibilidad. ¡Siempre estoy dispuesto a tomar un café tranquilo!",
+    atend_sched_title: "Agendamiento Preferencial",
+    atend_p3: "Para una mejor organización, es preferible que las reuniones se agenden con anticipación a través de la Agenda Virtual. Cada reunión tendrá hasta <strong>30 minutos</strong> de duración y puede realizarse de forma <strong>presencial</strong> o por <strong>videoconferencia</strong> (enlace generado automáticamente).",
+    atend_local_title: "Ubicación Presencial",
+    atend_p4: "Las atenciones presenciales se realizarán en el <strong>LED/DAUD</strong> y cada atención deberá estar restringida a un horario por alumno.",
+    atend_btn: "Agendar por Agenda Virtual",
+    atend_cal_title: "Agenda Virtual",
+    atend_cal_sub: "Haga clic para ver horarios disponibles y agendar",
+    atend_btn_open: "Abrir agenda",
+  }
+};
+
+function setLang(lang) {
+  document.documentElement.setAttribute('lang',
+    lang === 'pt' ? 'pt-BR' : lang === 'en' ? 'en' : 'es');
+  document.documentElement.setAttribute('data-lang', lang);
+
+  // Update button states
+  ['pt','en','es'].forEach(l => {
+    document.getElementById('btn-' + l).classList.toggle('active', l === lang);
+  });
+
+  // Translate all elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang][key] !== undefined) {
+      el.innerHTML = i18n[lang][key];
+    }
+  });
+
+  // Update page title
+  const titles = { pt: 'Prof. Esequiel Mesquita | UFC – IAUD',
+                   en: 'Prof. Esequiel Mesquita | UFC – IAUD',
+                   es: 'Prof. Esequiel Mesquita | UFC – IAUD' };
+  document.title = titles[lang];
+}
+</script>
+</body>
+</html>
